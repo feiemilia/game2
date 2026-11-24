@@ -10,5 +10,5 @@
 
 - Added Godot 4.7.2 Web Release preset and exported the current incumbent game to `web-export/`.
 - Added a local preview server and repeatable export command.
-- Added a GitHub Pages Actions workflow and pushed the project plus Web build to `feiemilia/game2` on `main` (latest commit `89d167e`). Blender portable runtime and Godot caches were excluded.
+- Added a GitHub Pages Actions workflow and pushed the project plus Web build to `feiemilia/game2` on `main` (initial project commit `87ac6de`). Follow-up commits documented Pages setup and export verification. Blender portable runtime and Godot caches were excluded.
 - GitHub Pages is disabled in repository settings. The first deploy run (`45413713178`) stopped at Configure GitHub Pages; configure Pages Source as GitHub Actions, then rerun.
