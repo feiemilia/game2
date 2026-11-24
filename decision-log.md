@@ -22,3 +22,11 @@
 - Date: 2026-11-24
 - Status: confirmed from user brief
 - The supplied game page/images guide atmosphere and broad visual tone only. Create original characters, props, and room layouts.
+
+## D-004 — Public GitHub deployment
+
+- Date: 2026-11-24
+- Decision owner: user
+- Status: confirmed
+- Supersedes the earlier no-public-hosting assumption: deploy the project and Web build to `https://github.com/feiemilia/game2.git`, and publish the Web build through GitHub Pages.
+- Repository `main` received the initial project commit. GitHub currently reports Pages disabled; its first run stopped at the Pages configuration step. Repository owner must set Pages Source to GitHub Actions before rerunning.

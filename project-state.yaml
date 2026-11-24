@@ -14,7 +14,7 @@ confirmed:
   - Feedback: show score per level and a final learning progress summary
   - Learning priority: learning outcomes (Learning-first profile)
   - Integrity and accessibility: strongly penalize guessing/exploitation and cognitive overload
-  - Delivery: local Godot Web export files; no public hosting requested
+  - Delivery: local Web export and deployment to the public feiemilia/game2 GitHub repository; GitHub Pages hosting requested on 2026-11-24
   - Visual reference: user-provided Little Nightmares Steam page and attached illustrated references; use only as mood/reference, not copied assets
 assumptions:
   - Age band is approximately 8-12; exact grade, language, and curriculum standards are not yet specified
@@ -42,9 +42,11 @@ required_tests:
   - GUI launch and core input smoke test
   - Web export completes with project assets included
   - Local web server can serve exported entry point and wasm/pck assets
+  - GitHub Pages workflow completes and published URL loads the game
 passed_tests:
   - Existing gameplay flow smoke test passed in prior project work: title, movement, score, retry, keys, both levels, results
 known_limitations:
   - Existing tests are automated smoke coverage, not evidence of improved student learning
   - Web export templates are not currently installed in the default Godot user template directory
+  - The Web build is pushed to GitHub main, but Pages is disabled in repository settings; first Pages workflow failed at Configure GitHub Pages and needs Pages Source set to GitHub Actions
   - Original C:\blender Blender 5.3 build previously failed on this CPU; portable Blender 4.5.3 was used successfully
