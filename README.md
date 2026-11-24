@@ -56,4 +56,4 @@ C:\Godot\Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res:
 
 ## GitHub Pages 部署
 
-推送 `main` 後，`.github/workflows/deploy-pages.yml` 會把 `web-export/` 發布到 GitHub Pages。預期網址：<https://feiemilia.github.io/game2/>。本次已推送專案和 Web 匯出，首次 workflow 因 Pages 尚未啟用而停在 Configure GitHub Pages。請在 [Repository Settings → Pages](https://github.com/feiemilia/game2/settings/pages) 將 Source 設為 **GitHub Actions**，再到 [Actions](https://github.com/feiemilia/game2/actions/workflows/deploy-pages.yml) 重新執行 workflow。遊戲概念 B、C、E′仍待使用者選擇，目前 Web 預覽是現有玩法 A。
+推送 `main` 後，`.github/workflows/deploy-pages.yml` 會把 `web-export/` 發布到 GitHub Pages。網站已上線：<https://feiemilia.github.io/game2/>。最新部署 workflow 已成功，首頁與 Godot JS/WASM/PCK 資源均回應 HTTP 200。部署歷程可在 [Actions](https://github.com/feiemilia/game2/actions/workflows/deploy-pages.yml) 查看。遊戲概念 B、C、E′仍待使用者選擇，目前 Web 版是現有玩法 A。

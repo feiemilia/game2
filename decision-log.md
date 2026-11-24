@@ -29,4 +29,4 @@
 - Decision owner: user
 - Status: confirmed
 - Supersedes the earlier no-public-hosting assumption: deploy the project and Web build to `https://github.com/feiemilia/game2.git`, and publish the Web build through GitHub Pages.
-- Repository `main` received the initial project commit. GitHub currently reports Pages disabled; its first run stopped at the Pages configuration step. Repository owner must set Pages Source to GitHub Actions before rerunning.
+- Repository `main` received the project and Web export. After Pages Source was set to GitHub Actions, workflow run `45430656023` succeeded and the public homepage became reachable.
