@@ -1,0 +1,50 @@
+project_id: dream-sprite-financial-literacy
+mode: continuous
+current_phase: dt-ideate
+requirements_version: 0.2
+gate_status: pending
+dt_handoff: pending
+sdlc_release: pending
+final_acceptance: pending
+confirmed:
+  - Audience: elementary-school learners
+  - Subject: everyday personal finance, saving, and age-appropriate investment concepts
+  - Game length: two levels, each with one required interactive learning activity
+  - Progression: each level awards a key only after its challenge is solved
+  - Feedback: show score per level and a final learning progress summary
+  - Learning priority: learning outcomes (Learning-first profile)
+  - Integrity and accessibility: strongly penalize guessing/exploitation and cognitive overload
+  - Delivery: local Godot Web export files; no public hosting requested
+  - Visual reference: user-provided Little Nightmares Steam page and attached illustrated references; use only as mood/reference, not copied assets
+assumptions:
+  - Age band is approximately 8-12; exact grade, language, and curriculum standards are not yet specified
+  - Two-level scope should focus on goal-based budgeting/saving and risk-aware investing, without financial advice
+  - Existing Godot project is an incumbent prototype, not yet the user's approved final gameplay direction
+  - Observe learning with task accuracy plus a brief explain-your-choice prompt; observe guessing/overload through interaction events and playtest notes
+open_questions:
+  - Human selection of gameplay concept from the blind tournament shortlist
+  - Human selection of one visual direction after gameplay approval
+  - Exact grade, localization, and school curriculum alignment
+  - Human acceptance after local Web build review
+artifacts:
+  project_brief: project-brief.md
+  decision_log: decision-log.md
+  concept_tournament: design/concept-tournament.md
+  change_log: change-log.md
+  traceability: README.md
+  blender_source: blender/create_dream_sprite.py
+  blender_project: blender/dream_sprite.blend
+  blender_export: blender/dream_sprite.glb
+  godot_project: project.godot
+  web_export: web-export/
+required_tests:
+  - Headless gameplay/flow smoke test
+  - GUI launch and core input smoke test
+  - Web export completes with project assets included
+  - Local web server can serve exported entry point and wasm/pck assets
+passed_tests:
+  - Existing gameplay flow smoke test passed in prior project work: title, movement, score, retry, keys, both levels, results
+known_limitations:
+  - Existing tests are automated smoke coverage, not evidence of improved student learning
+  - Web export templates are not currently installed in the default Godot user template directory
+  - Original C:\blender Blender 5.3 build previously failed on this CPU; portable Blender 4.5.3 was used successfully
