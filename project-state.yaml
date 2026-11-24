@@ -25,6 +25,7 @@ open_questions:
   - Human selection of gameplay concept from the blind tournament shortlist
   - Human selection of one visual direction after gameplay approval
   - Exact grade, localization, and school curriculum alignment
+  - GitHub Pages Source must be enabled as GitHub Actions before the first site deployment can complete
   - Human acceptance after local Web build review
 artifacts:
   project_brief: project-brief.md
@@ -44,9 +45,11 @@ required_tests:
   - Local web server can serve exported entry point and wasm/pck assets
   - GitHub Pages workflow completes and published URL loads the game
 passed_tests:
-  - Existing gameplay flow smoke test passed in prior project work: title, movement, score, retry, keys, both levels, results
+  - Godot 4.7.2 headless gameplay flow smoke test: title, movement, score, retry, keys, both levels, results
+  - Godot 4.7.2 Web Release export succeeded; HTML, JavaScript, WebAssembly, and PCK outputs were created
 known_limitations:
   - Existing tests are automated smoke coverage, not evidence of improved student learning
-  - Web export templates are not currently installed in the default Godot user template directory
+  - Web export uses a project-scoped official Godot 4.7.2 template; it is not installed in the default user template directory
+  - Local browser preview was not verified because this environment denied local loopback socket access
   - The Web build is pushed to GitHub main, but Pages is disabled in repository settings; first Pages workflow failed at Configure GitHub Pages and needs Pages Source set to GitHub Actions
   - Original C:\blender Blender 5.3 build previously failed on this CPU; portable Blender 4.5.3 was used successfully
