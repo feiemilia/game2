@@ -56,4 +56,4 @@ C:\Godot\Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res:
 
 ## GitHub Pages 部署
 
-推送 `main` 後，`.github/workflows/deploy-pages.yml` 會把 `web-export/` 發布到 GitHub Pages。網站已上線：<https://feiemilia.github.io/game2/>。網頁版外殼依照[參考頁](https://ujh-del.github.io/game2/)的天空色系、圓角 HUD、得分與 KEY 狀態、操作提示和響應式排版製作；遊戲仍保留兩關理財挑戰。部署歷程可在 [Actions](https://github.com/feiemilia/game2/actions/workflows/deploy-pages.yml) 查看。
+推送 `main` 後，`.github/workflows/deploy-pages.yml` 會把 `web-export/` 發布到 GitHub Pages。網站已上線：<https://feiemilia.github.io/game2/>。網頁版採全螢幕沉浸式 Godot 畫布，載入狀態以暗色星夜面板呈現，呼應[參考頁](https://rabbit-chun.github.io/game2b/)；關卡、分數、KEY 與操作提示由遊戲畫面呈現，並保留兩關理財挑戰。部署歷程可在 [Actions](https://github.com/feiemilia/game2/actions/workflows/deploy-pages.yml) 查看。

@@ -2,209 +2,70 @@
 <html lang="zh-Hant">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#9cdbf3">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="theme-color" content="#080a12">
 	<meta name="description" content="星光理財島：給小學生的兩關生活理財與投資風險互動冒險。">
-	<title>小小夢魔：星光理財島｜小小理財冒險</title>
+	<title>小小夢魔：星光理財島｜小小夢魔：星夜理財夢</title>
 	<style>
-		:root {
-			color-scheme: light;
-			--ink: #17324a;
-			--muted: #527084;
-			--cream: #fff9e9;
-			--teal: #158c9d;
-			--coral: #e66d54;
-			--yellow: #ffd45f;
-			--green: #4da86e;
-			font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-		}
-		* { box-sizing: border-box; }
-		body {
-			margin: 0;
-			min-height: 100vh;
-			color: var(--ink);
-			background:
-				radial-gradient(ellipse at 9% 13%, rgba(255,255,255,.82) 0 5rem, transparent 5.1rem),
-				radial-gradient(ellipse at 16% 15%, rgba(255,255,255,.72) 0 3rem, transparent 3.1rem),
-				linear-gradient(180deg, #a9e3f4 0%, #d8f2f5 62%, #cce8bd 100%);
-			padding: clamp(10px, 2.2vw, 28px);
-		}
-		button { font: inherit; }
-		.page { width: min(1320px, 100%); margin: 0 auto; }
-		.hud {
-			display: grid;
-			grid-template-columns: minmax(205px, .9fr) minmax(240px, 1.2fr) minmax(220px, .8fr);
-			align-items: center;
-			gap: 18px;
-			padding: 14px 20px;
-			margin-bottom: 14px;
-			border: 3px solid rgba(255,255,255,.94);
-			border-radius: 22px;
-			background: rgba(255,249,233,.96);
-			box-shadow: 0 7px 0 rgba(23,50,74,.08), 0 16px 32px rgba(54,111,127,.12);
-		}
-		.brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
-		.brand-mark {
-			display: grid; place-items: center; flex: 0 0 48px; height: 48px;
-			border-radius: 16px; color: var(--ink); background: var(--yellow);
-			font-size: 27px; box-shadow: inset 0 -4px rgba(126,91,21,.16);
-		}
-		.brand-name { display: block; font-size: clamp(18px, 2vw, 23px); font-weight: 900; letter-spacing: .03em; line-height: 1.15; }
-		.brand small { color: var(--muted); font-size: 12px; font-weight: 700; }
-		.progress { min-width: 0; }
-		.progress-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 800; }
-		#levelText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-		#progressText { flex: none; color: var(--teal); font-size: 13px; }
-		.progress-track { overflow: hidden; height: 13px; border-radius: 99px; background: #d9e3df; box-shadow: inset 0 2px 3px rgba(23,50,74,.12); }
-		#progressBar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #62c796, var(--teal)); transition: width .35s ease; }
-		.stats { display: flex; justify-content: flex-end; gap: 9px; }
-		.stat {
-			min-width: 91px; padding: 8px 11px; border-radius: 13px;
-			background: #fff; color: var(--muted); font-size: 12px; font-weight: 800;
-			box-shadow: inset 0 -3px rgba(23,50,74,.06);
-		}
-		.stat b { display: block; margin-top: 2px; color: var(--ink); font-size: 18px; font-variant-numeric: tabular-nums; }
-		.stat.key { background: #fff0c0; }
-		.game-card {
-			padding: 10px; border: 3px solid #fff; border-radius: 26px;
-			background: var(--cream); box-shadow: 0 8px 0 rgba(23,50,74,.09), 0 18px 36px rgba(54,111,127,.14);
-		}
-		.game-topline { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 4px 7px 10px; }
-		.scene-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 900; color: var(--muted); }
-		.scene-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(77,168,110,.16); }
-		.fullscreen {
-			border: 0; border-radius: 999px; padding: 8px 13px; color: #fff; background: var(--teal);
-			font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: inset 0 -3px rgba(0,0,0,.12); transition: transform .15s, background .15s;
-		}
-		.fullscreen:hover { background: #117987; transform: translateY(-1px); }
-		.fullscreen:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-		.game-frame { position: relative; overflow: hidden; border-radius: 18px; background: #253c60; isolation: isolate; }
-		#canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; outline: none; touch-action: none; }
-		#canvas:focus-visible { outline: 4px solid var(--yellow); outline-offset: -4px; }
-		.loading {
-			position: absolute; inset: 0; z-index: 2; display: grid; place-content: center; gap: 12px;
-			padding: 24px; color: var(--ink); text-align: center; background: #e7f5ee; font-weight: 800;
-		}
-		.loading[hidden] { display: none; }
-		.spinner { width: 32px; height: 32px; margin: 0 auto; border: 4px solid #bdddd3; border-top-color: var(--teal); border-radius: 50%; animation: spin .85s linear infinite; }
-		#loadProgress { width: min(320px, 72vw); accent-color: var(--teal); }
-		#loadError { display: none; max-width: 460px; color: #9b3728; }
-		#loadError.show { display: block; }
-		@keyframes spin { to { transform: rotate(360deg); } }
-		.controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 14px 4px 4px; color: var(--muted); font-size: 13px; font-weight: 750; }
-		.control-chip { padding: 6px 10px; border: 1px solid #d8e5dc; border-radius: 999px; background: #fff; }
-		.control-chip b { color: var(--ink); }
-		footer { display: flex; justify-content: center; padding: 14px 8px 0; color: #426378; text-align: center; font-size: 12px; font-weight: 700; }
-		body.is-fullscreen { padding: 0; background: #182d46; }
-		body.is-fullscreen .page { width: 100%; height: 100dvh; display: grid; grid-template-rows: auto 1fr; }
-		body.is-fullscreen .hud { margin: 8px 10px; padding: 8px 14px; }
-		body.is-fullscreen .game-card { min-height: 0; padding: 6px; border-radius: 0; }
-		body.is-fullscreen .game-frame { height: calc(100% - 34px); display: grid; place-items: center; }
-		body.is-fullscreen #canvas { width: auto; height: 100%; max-width: 100%; }
-		body.is-fullscreen .controls, body.is-fullscreen footer { display: none; }
-		@media (max-width: 760px) {
-			body { padding: 9px; }
-			.hud { grid-template-columns: 1fr auto; gap: 9px 12px; padding: 10px 12px; border-radius: 18px; }
-			.progress { grid-column: 1 / -1; grid-row: 2; }
-			.stats { grid-column: 2; grid-row: 1; gap: 6px; }
-			.stat { min-width: 70px; padding: 6px 8px; }
-			.stat b { font-size: 16px; }
-			.game-card { padding: 6px; border-radius: 19px; }
-			.game-topline { padding: 2px 3px 7px; }
-			.scene-label { font-size: 11px; }
-			.fullscreen { padding: 7px 10px; font-size: 12px; }
-			.game-frame { border-radius: 13px; }
-			.controls { gap: 6px; padding-top: 10px; font-size: 11px; }
-			.control-chip { padding: 5px 8px; }
-			footer { padding-top: 10px; font-size: 11px; }
-		}
-		@media (prefers-reduced-motion: reduce) {
-			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
-		}
+		html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #080a12; }
+		body { color: #f5f1e8; font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; touch-action: none; }
+		#canvas { display: block; width: 100vw; height: 100vh; border: 0; outline: none; touch-action: none; }
+		#canvas:focus { outline: none; }
+		#status { position: fixed; inset: 0; display: grid; place-items: center; background: #10121b; transition: opacity .35s ease, visibility .35s ease; }
+		#status.done { opacity: 0; visibility: hidden; pointer-events: none; }
+		#loading-card { display: grid; justify-items: center; gap: 16px; width: min(420px, calc(100vw - 48px)); padding: 34px 24px; text-align: center; border: 1px solid rgba(221, 204, 157, .3); border-radius: 18px; background: rgba(27, 29, 41, .88); box-shadow: 0 22px 80px rgba(0, 0, 0, .36); }
+		#mark { color: #f2d18a; font-size: 28px; line-height: 1; }
+		#label { font-size: 16px; font-weight: 750; letter-spacing: .04em; }
+		#sub-label { color: #b5b4bf; font-size: 12px; line-height: 1.65; }
+		progress { width: min(300px, 70vw); height: 8px; overflow: hidden; border: 0; border-radius: 99px; background: #383847; accent-color: #d7b76e; }
+		progress::-webkit-progress-bar { border-radius: 99px; background: #383847; }
+		progress::-webkit-progress-value { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
+		progress::-moz-progress-bar { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
+		#notice { display: none; max-width: 360px; color: #f0b5a9; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+		#notice.show { display: block; }
+		@media (prefers-reduced-motion: reduce) { #status { transition: none; } }
 	</style>
 	<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
 </head>
 <body>
-	<main class="page" id="gamePage">
-		<header class="hud" aria-label="遊戲狀態">
-			<div class="brand">
-				<span class="brand-mark" aria-hidden="true">✦</span>
-				<div><span class="brand-name">星光理財島</span><small>小小夢魔・兩關理財冒險</small></div>
-			</div>
-			<div class="progress" aria-live="polite">
-				<div class="progress-top"><span id="levelText">準備出發</span><span id="progressText">已得 KEY 0 / 2</span></div>
-				<div class="progress-track" role="progressbar" aria-label="鑰匙進度" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div id="progressBar"></div></div>
-			</div>
-			<div class="stats">
-				<div class="stat">總得分<b id="scoreText">0</b></div>
-				<div class="stat key">本關得分<b id="stageScoreText">0</b></div>
-				<div class="stat">KEY<b id="keyText">0 / 2</b></div>
-			</div>
-		</header>
-		<section class="game-card" aria-label="星光理財島遊戲">
-			<div class="game-topline">
-				<div class="scene-label"><span class="scene-dot" aria-hidden="true"></span><span id="hint" role="status" aria-live="polite">走進夢境，開始兩關理財冒險。</span></div>
-				<button class="fullscreen" id="fullscreenButton" type="button" aria-label="切換全螢幕">全螢幕 ⛶</button>
-			</div>
-			<div class="game-frame" id="gameFrame">
-				<canvas id="canvas" aria-label="星光理財島互動遊戲畫面" tabindex="0">你的瀏覽器不支援 Canvas，請改用最新版 Chrome、Edge 或 Firefox。</canvas>
-				<div class="loading" id="loading" role="status" aria-live="polite">
-					<div class="spinner" aria-hidden="true"></div>
-					<div id="loadLabel">正在準備夢境，請稍候…</div>
-					<progress id="loadProgress" max="100" value="0" aria-label="載入進度"></progress>
-					<div id="loadError"></div>
-				</div>
-			</div>
-		</section>
-		<nav class="controls" aria-label="遊戲操作說明">
-			<span class="control-chip"><b>← →</b> / A D 移動</span>
-			<span class="control-chip"><b>Space</b> 跳躍</span>
-			<span class="control-chip"><b>E</b> 靠近光門互動</span>
-			<span class="control-chip">觸控裝置可用畫面按鈕</span>
-		</nav>
-		<footer>投資有風險、沒有保證獲利｜本遊戲為理財教育，不構成投資建議</footer>
-	</main>
+	<canvas id="canvas" aria-label="小小夢魔：星夜理財夢"></canvas>
+	<noscript>此遊戲需要啟用 JavaScript 才能執行。</noscript>
+	<div id="status" role="status" aria-live="polite">
+		<div id="loading-card">
+			<div id="mark" aria-hidden="true">✦</div>
+			<div id="label">正在點亮星夜夢境…</div>
+			<div id="sub-label">小小夢魔：星夜理財夢<br>準備兩段理財冒險與星星鑰匙</div>
+			<progress id="progress" max="100" value="0" aria-label="遊戲載入進度"></progress>
+			<div id="notice"></div>
+		</div>
+	</div>
 	<script src="index.js"></script>
 	<script>
 		const canvas = document.getElementById("canvas");
-		const loading = document.getElementById("loading");
-		const loadLabel = document.getElementById("loadLabel");
-		const loadProgress = document.getElementById("loadProgress");
-		const loadError = document.getElementById("loadError");
-		const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":53812,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
-		window.setGameHud = (state) => {
-			const level = state.screen === "title" ? "準備出發｜兩關理財冒險" : `第 ${state.stage} 關｜${state.level}`;
-			document.getElementById("levelText").textContent = level;
-			document.getElementById("scoreText").textContent = state.score;
-			document.getElementById("stageScoreText").textContent = state.stage_score;
-			document.getElementById("keyText").textContent = `${state.keys} / 2`;
-			document.getElementById("progressText").textContent = `已得 KEY ${state.keys} / 2`;
-			document.getElementById("progressBar").style.width = `${state.keys * 50}%`;
-			document.querySelector('[role="progressbar"]').setAttribute("aria-valuenow", state.keys);
-			document.getElementById("hint").textContent = state.message;
-		};
-		document.getElementById("fullscreenButton").addEventListener("click", async () => {
-			const frame = document.getElementById("gamePage");
-			if (!document.fullscreenElement) await frame.requestFullscreen?.();
-			else await document.exitFullscreen?.();
-		});
-		document.addEventListener("fullscreenchange", () => document.body.classList.toggle("is-fullscreen", !!document.fullscreenElement));
+		const status = document.getElementById("status");
+		const progress = document.getElementById("progress");
+		const label = document.getElementById("label");
+		const notice = document.getElementById("notice");
+		const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":53844,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
 		engine.startGame({
 			canvas,
-			canvasResizePolicy: 0,
+			canvasResizePolicy: 2,
 			onProgress(current, total) {
-				if (total > 0) loadProgress.value = Math.round(current / total * 100);
-				loadLabel.textContent = total > 0 ? `正在載入夢境… ${loadProgress.value}%` : "正在準備夢境，請稍候…";
+				if (total > 0) {
+					progress.max = total;
+					progress.value = current;
+					label.textContent = `正在載入夢境… ${Math.round(current / total * 100)}%`;
+				}
 			}
 		}).then(() => {
-			loading.hidden = true;
+			status.classList.add("done");
 			canvas.focus({ preventScroll: true });
 		}).catch((error) => {
-			loadLabel.textContent = "遊戲載入失敗";
-			loadError.textContent = "請重新整理頁面，或改用最新版 Chrome、Edge、Firefox。";
-			loadError.classList.add("show");
+			label.textContent = "夢境載入失敗";
+			notice.textContent = "請重新整理頁面，或改用最新版 Chrome、Edge 或 Firefox。";
+			notice.classList.add("show");
 			console.error(error);
 		});
 	</script>

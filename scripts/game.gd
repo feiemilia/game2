@@ -295,8 +295,6 @@ func _draw_touch_buttons() -> void:
 	_button(Rect2(1082, 612, 132, 78), "跳躍", Color("323955"), CREAM, 22)
 
 func _draw_hud() -> void:
-	if OS.has_feature("web"):
-		return
 	_panel(Rect2(28, 22, 412, 98), Color(0.04, 0.06, 0.13, 0.9), Color(0.68, 0.72, 0.9))
 	_text("第 %d 關　%s" % [stage, "月光市集" if stage == 1 else "星星果園"], Vector2(49, 60), 22, CREAM)
 	_text("本關 %d 分　｜　總分 %d" % [stage_score, score], Vector2(49, 97), 17, GOLD)

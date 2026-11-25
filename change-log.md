@@ -1,5 +1,11 @@
 # Change Log
 
+## 2026-11-25 — Full-screen Web shell update
+
+- Reworked the custom shell to fill the browser viewport, with a dark star-night loading overlay and progress bar inspired by the new reference.
+- Enabled the in-game level, score, and key HUD in Web builds; removed the separate page HUD from the player experience.
+
+
 ## 2026-11-25 — Reference-inspired Web presentation
 
 - Added a responsive custom Godot Web shell inspired by the user reference: sky palette, rounded HUD, score/KEY progress, operation guidance, and mobile layout.

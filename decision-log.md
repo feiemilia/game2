@@ -37,3 +37,10 @@
 - Decision owner: user
 - Status: confirmed
 - Use https://ujh-del.github.io/game2/ as the visual reference for the Godot Web page shell. Apply its bright sky palette, clear score/key HUD, concise operation guidance, and responsive layout while preserving this project's two finance-learning stages and original assets.
+
+## D-006 — Full-screen Web reference
+
+- Date: 2026-11-25
+- Decision owner: user
+- Status: confirmed
+- Follow https://rabbit-chun.github.io/game2b/ as the Web presentation reference: run the Godot canvas full-screen with a dark star-night loading state, and keep status and instructions in the game canvas. Preserve the two-level finance game and its in-game HUD.
