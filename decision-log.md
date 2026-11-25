@@ -30,3 +30,10 @@
 - Status: confirmed
 - Supersedes the earlier no-public-hosting assumption: deploy the project and Web build to `https://github.com/feiemilia/game2.git`, and publish the Web build through GitHub Pages.
 - Repository `main` received the project and Web export. After Pages Source was set to GitHub Actions, workflow run `45430656023` succeeded and the public homepage became reachable.
+
+## D-005 — Web presentation reference
+
+- Date: 2026-11-25
+- Decision owner: user
+- Status: confirmed
+- Use https://ujh-del.github.io/game2/ as the visual reference for the Godot Web page shell. Apply its bright sky palette, clear score/key HUD, concise operation guidance, and responsive layout while preserving this project's two finance-learning stages and original assets.
