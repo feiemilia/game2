@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="theme-color" content="#080a12">
+	<meta name="description" content="星光理財島：給小學生的兩關生活理財與投資風險互動冒險。">
+	<title>小小夢魔：星光理財島｜小小夢魔：星夜理財夢</title>
+	<style>
+		html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #080a12; }
+		body { color: #f5f1e8; font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; touch-action: none; }
+		#canvas { display: block; width: 100vw; height: 100vh; border: 0; outline: none; touch-action: none; }
+		#canvas:focus { outline: none; }
+		#status { position: fixed; inset: 0; display: grid; place-items: center; background: #10121b; transition: opacity .35s ease, visibility .35s ease; }
+		#status.done { opacity: 0; visibility: hidden; pointer-events: none; }
+		#loading-card { display: grid; justify-items: center; gap: 16px; width: min(420px, calc(100vw - 48px)); padding: 34px 24px; text-align: center; border: 1px solid rgba(221, 204, 157, .3); border-radius: 18px; background: rgba(27, 29, 41, .88); box-shadow: 0 22px 80px rgba(0, 0, 0, .36); }
+		#mark { color: #f2d18a; font-size: 28px; line-height: 1; }
+		#label { font-size: 16px; font-weight: 750; letter-spacing: .04em; }
+		#sub-label { color: #b5b4bf; font-size: 12px; line-height: 1.65; }
+		progress { width: min(300px, 70vw); height: 8px; overflow: hidden; border: 0; border-radius: 99px; background: #383847; accent-color: #d7b76e; }
+		progress::-webkit-progress-bar { border-radius: 99px; background: #383847; }
+		progress::-webkit-progress-value { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
+		progress::-moz-progress-bar { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
+		#notice { display: none; max-width: 360px; color: #f0b5a9; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+		#notice.show { display: block; }
+		@media (prefers-reduced-motion: reduce) { #status { transition: none; } }
+	</style>
+	<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+
+</head>
+<body>
+	<canvas id="canvas" aria-label="小小夢魔：星夜理財夢"></canvas>
+	<noscript>此遊戲需要啟用 JavaScript 才能執行。</noscript>
+	<div id="status" role="status" aria-live="polite">
+		<div id="loading-card">
+			<div id="mark" aria-hidden="true">✦</div>
+			<div id="label">正在點亮星夜夢境…</div>
+			<div id="sub-label">小小夢魔：星夜理財夢<br>準備兩段理財冒險與星星鑰匙</div>
+			<progress id="progress" max="100" value="0" aria-label="遊戲載入進度"></progress>
+			<div id="notice"></div>
+		</div>
+	</div>
+	<script src="index.js"></script>
+	<script>
+		const canvas = document.getElementById("canvas");
+		const status = document.getElementById("status");
+		const progress = document.getElementById("progress");
+		const label = document.getElementById("label");
+		const notice = document.getElementById("notice");
+		const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":53844,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+		engine.startGame({
+			canvas,
+			canvasResizePolicy: 2,
+			onProgress(current, total) {
+				if (total > 0) {
+					progress.max = total;
+					progress.value = current;
+					label.textContent = `正在載入夢境… ${Math.round(current / total * 100)}%`;
+				}
+			}
+		}).then(() => {
+			status.classList.add("done");
+			canvas.focus({ preventScroll: true });
+		}).catch((error) => {
+			label.textContent = "夢境載入失敗";
+			notice.textContent = "請重新整理頁面，或改用最新版 Chrome、Edge 或 Firefox。";
+			notice.classList.add("show");
+			console.error(error);
+		});
+	</script>
+</body>
+</html>
+
