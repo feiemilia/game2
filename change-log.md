@@ -1,5 +1,11 @@
 # Change Log
 
+## 2026-11-25 — GitHub Pages root publish
+
+- Mirrored the Godot Web release files to the repository root because the active Pages build uses the main-branch source; this lets the public site serve the full-screen game directly.
+- Confirmed native Pages build 45616324180 succeeded. The published shell shows the full-screen star-night loader, and JS/WASM/PCK all return HTTP 200.
+
+
 ## 2026-11-25 — Full-screen Web shell update
 
 - Reworked the custom shell to fill the browser viewport, with a dark star-night loading overlay and progress bar inspired by the new reference.
