@@ -40,6 +40,7 @@ func _ready() -> void:
 	font.font_names = PackedStringArray(["Microsoft JhengHei UI", "Microsoft JhengHei", "Noto Sans CJK TC", "Arial"])
 	focus_mode = Control.FOCUS_ALL
 	grab_focus()
+	_sync_web_shell()
 
 func _process(delta: float) -> void:
 	if screen == "play" and not question_open:
@@ -65,18 +66,24 @@ func _process(delta: float) -> void:
 
 func _collect_coins() -> void:
 	var places := [255.0, 478.0, 715.0, 1055.0, 1275.0, 1500.0]
+	var collected := false
 	for i in range(places.size()):
 		if not coins[i] and absf(x - places[i]) < 38:
 			coins[i] = true
 			score += 10
 			stage_score += 10
+			collected = true
+	if collected:
+		_sync_web_shell()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ENTER:
 			if screen == "title": _start_stage(1)
 			elif screen == "key1": _start_stage(2)
-			elif screen == "results": screen = "title"
+			elif screen == "results":
+				screen = "title"
+				_sync_web_shell("準備好了，再玩一次吧！")
 		if event.keycode == KEY_E and screen == "play":
 			var station := 825.0 if stage == 1 else 1640.0
 			if absf(x - station) < 140: _open_quiz()
@@ -100,7 +107,9 @@ func _click(p: Vector2) -> void:
 		for i in range(answer_rects.size()):
 			if answer_rects[i].has_point(p): _answer(i)
 	elif screen == "key1" and Rect2(425, 520, 430, 75).has_point(p): _start_stage(2)
-	elif screen == "results" and Rect2(425, 566, 430, 74).has_point(p): screen = "title"
+	elif screen == "results" and Rect2(425, 566, 430, 74).has_point(p):
+		screen = "title"
+		_sync_web_shell("準備好了，再玩一次吧！")
 
 func _step_move(amount: float) -> void:
 	var limit := 900.0 if stage == 1 and not keys[0] else END_X
@@ -125,16 +134,19 @@ func _start_stage(n: int) -> void:
 	wrong = false
 	screen = "play"
 	grab_focus()
+	_sync_web_shell("尋找互動站，答對題目就能取得 KEY。")
 
 func _open_quiz() -> void:
 	question_open = true
 	wrong = false
 	answer_rects.clear()
+	_sync_web_shell("選出最好的做法，答對才能取得 KEY。")
 
 func _answer(index: int) -> void:
 	var correct := 1 if stage == 1 else 2
 	if index != correct:
 		wrong = true
+		_sync_web_shell("再想想：哪個選擇最能照顧未來的自己？")
 		return
 	if not wrong: first_try[stage - 1] = true
 	stage_score += 100
@@ -142,6 +154,7 @@ func _answer(index: int) -> void:
 	keys[stage - 1] = true
 	question_open = false
 	screen = "key1" if stage == 1 else "results"
+	_sync_web_shell("拿到鑰匙了！準備前往下一關。" if stage == 1 else "兩把鑰匙都點亮了，冒險完成！")
 
 func _draw() -> void:
 	if screen == "title":
@@ -282,6 +295,8 @@ func _draw_touch_buttons() -> void:
 	_button(Rect2(1082, 612, 132, 78), "跳躍", Color("323955"), CREAM, 22)
 
 func _draw_hud() -> void:
+	if OS.has_feature("web"):
+		return
 	_panel(Rect2(28, 22, 412, 98), Color(0.04, 0.06, 0.13, 0.9), Color(0.68, 0.72, 0.9))
 	_text("第 %d 關　%s" % [stage, "月光市集" if stage == 1 else "星星果園"], Vector2(49, 60), 22, CREAM)
 	_text("本關 %d 分　｜　總分 %d" % [stage_score, score], Vector2(49, 97), 17, GOLD)
@@ -289,6 +304,25 @@ func _draw_hud() -> void:
 	_text("星星果實　%d / 6" % coins.count(true), Vector2(979, 59), 18, CREAM)
 	_key(Vector2(1000, 93), 0.48)
 	_text("鑰匙 %d / 2" % (int(keys[0]) + int(keys[1])), Vector2(1028, 98), 16, TEAL)
+
+func _sync_web_shell(message: String = "") -> void:
+	if not OS.has_feature("web"):
+		return
+	var keys_collected := int(keys[0]) + int(keys[1])
+	var level_name := "月光市集" if stage == 1 else "星星果園"
+	var status_message := message
+	if status_message.is_empty():
+		status_message = "走進夢境，開始兩關理財冒險。" if screen == "title" else "方向鍵移動，靠近光門按 E 互動。"
+	var state := {
+		"screen": screen,
+		"stage": stage,
+		"level": level_name,
+		"score": score,
+		"stage_score": stage_score,
+		"keys": keys_collected,
+		"message": status_message
+	}
+	JavaScriptBridge.eval("if (typeof window.setGameHud === 'function') { window.setGameHud(%s); }" % JSON.stringify(state))
 
 func _draw_quiz() -> void:
 	draw_rect(Rect2(0, 0, W, H), Color(0.025, 0.04, 0.11, 0.8))

@@ -1,5 +1,12 @@
 # Change Log
 
+## 2026-11-25 — Reference-inspired Web presentation
+
+- Added a responsive custom Godot Web shell inspired by the user reference: sky palette, rounded HUD, score/KEY progress, operation guidance, and mobile layout.
+- Connected stage, score, key, and hint updates from both learning levels to the page HUD while preserving the existing finance puzzles and scoring rules.
+- Excluded the standalone HTML shell source from the exported PCK; the Web preset uses it as the page shell.
+
+
 ## 2026-11-24 — Requirements baseline and design workflow
 
 - Recorded the user's education priority, strong guessing/overload penalties, and local Web delivery scope.

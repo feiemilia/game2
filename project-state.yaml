@@ -47,6 +47,7 @@ passed_tests:
   - Godot 4.7.2 headless gameplay flow smoke test: title, movement, score, retry, keys, both levels, results
   - Godot 4.7.2 Web Release export succeeded; HTML, JavaScript, WebAssembly, and PCK outputs were created
   - GitHub Pages deployment completed; homepage and JavaScript/WASM/PCK assets returned HTTP 200
+  - Reference-inspired Web shell exported with live HUD hooks and no unresolved Godot template tokens
 known_limitations:
   - Existing tests are automated smoke coverage, not evidence of improved student learning
   - Web export uses a project-scoped official Godot 4.7.2 template; it is not installed in the default user template directory
