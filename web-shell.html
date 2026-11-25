@@ -2,70 +2,80 @@
 <html lang="zh-Hant">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta name="theme-color" content="#080a12">
-	<meta name="description" content="星光理財島：給小學生的兩關生活理財與投資風險互動冒險。">
-	<title>$GODOT_PROJECT_NAME｜小小夢魔：星夜理財夢</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="theme-color" content="#09090d">
+	<meta name="description" content="微光理財屋：小小夢魔的兩關生活理財與投資風險冒險。">
+	<title>微光理財屋｜小小夢魔</title>
 	<style>
-		html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #080a12; }
+		html, body { width: 100%; height: 100%; margin: 0; padding: 0; border: 0; overflow: hidden; background: #09090d; }
 		body { color: #f5f1e8; font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; touch-action: none; }
 		#canvas { display: block; width: 100vw; height: 100vh; border: 0; outline: none; touch-action: none; }
 		#canvas:focus { outline: none; }
-		#status { position: fixed; inset: 0; display: grid; place-items: center; background: #10121b; transition: opacity .35s ease, visibility .35s ease; }
-		#status.done { opacity: 0; visibility: hidden; pointer-events: none; }
-		#loading-card { display: grid; justify-items: center; gap: 16px; width: min(420px, calc(100vw - 48px)); padding: 34px 24px; text-align: center; border: 1px solid rgba(221, 204, 157, .3); border-radius: 18px; background: rgba(27, 29, 41, .88); box-shadow: 0 22px 80px rgba(0, 0, 0, .36); }
-		#mark { color: #f2d18a; font-size: 28px; line-height: 1; }
-		#label { font-size: 16px; font-weight: 750; letter-spacing: .04em; }
-		#sub-label { color: #b5b4bf; font-size: 12px; line-height: 1.65; }
-		progress { width: min(300px, 70vw); height: 8px; overflow: hidden; border: 0; border-radius: 99px; background: #383847; accent-color: #d7b76e; }
-		progress::-webkit-progress-bar { border-radius: 99px; background: #383847; }
-		progress::-webkit-progress-value { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
-		progress::-moz-progress-bar { border-radius: 99px; background: linear-gradient(90deg, #8e7cae, #e6c77e); }
-		#notice { display: none; max-width: 360px; color: #f0b5a9; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
-		#notice.show { display: block; }
-		@media (prefers-reduced-motion: reduce) { #status { transition: none; } }
+		#status { position: fixed; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; visibility: hidden; background: #202027; }
+		#status.visible { visibility: visible; }
+		#status-splash { display: grid; place-items: center; gap: 18px; width: min(620px, 90vw); padding: 28px; color: #eee9dd; text-align: center; }
+		#emblem { display: grid; place-items: center; width: 78px; height: 78px; border: 1px solid rgba(232, 204, 140, .58); border-radius: 50%; color: #ecd18d; font-size: 37px; text-shadow: 0 0 22px rgba(239, 204, 125, .5); }
+		#title { font-size: clamp(25px, 5vw, 42px); font-weight: 900; letter-spacing: .16em; }
+		#subtitle { color: #bdbbc2; font-size: clamp(12px, 2vw, 15px); letter-spacing: .1em; }
+		#status-progress { position: fixed; left: 25%; bottom: 10%; width: 50%; height: 8px; display: none; border: 0; border-radius: 99px; overflow: hidden; background: #3e3d47; accent-color: #d9bd7e; }
+		#status-progress.visible { display: block; }
+		#status-progress::-webkit-progress-bar { background: #3e3d47; border-radius: 99px; }
+		#status-progress::-webkit-progress-value { background: linear-gradient(90deg, #88789e, #e1c680); border-radius: 99px; }
+		#status-progress::-moz-progress-bar { background: linear-gradient(90deg, #88789e, #e1c680); border-radius: 99px; }
+		#status-notice { display: none; max-width: min(460px, calc(100vw - 40px)); margin: 0 20px; padding: 16px 20px; overflow-wrap: anywhere; border: 1px solid #88505a; border-radius: 10px; color: #f0e7e4; background: #513941; text-align: center; line-height: 1.55; }
+		#status-notice.visible { display: block; }
+		@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 	</style>
 	$GODOT_HEAD_INCLUDE
 </head>
 <body>
-	<canvas id="canvas" aria-label="小小夢魔：星夜理財夢"></canvas>
+	<canvas id="canvas" aria-label="微光理財屋互動遊戲">
+		你的瀏覽器不支援 Canvas，請使用最新版 Chrome、Edge 或 Firefox。
+	</canvas>
 	<noscript>此遊戲需要啟用 JavaScript 才能執行。</noscript>
 	<div id="status" role="status" aria-live="polite">
-		<div id="loading-card">
-			<div id="mark" aria-hidden="true">✦</div>
-			<div id="label">正在點亮星夜夢境…</div>
-			<div id="sub-label">小小夢魔：星夜理財夢<br>準備兩段理財冒險與星星鑰匙</div>
-			<progress id="progress" max="100" value="0" aria-label="遊戲載入進度"></progress>
-			<div id="notice"></div>
+		<div id="status-splash">
+			<div id="emblem" aria-hidden="true">✦</div>
+			<div id="title">微光理財屋</div>
+			<div id="subtitle">小小夢魔・星夜理財冒險</div>
 		</div>
+		<progress id="status-progress" max="100" value="0" aria-label="遊戲載入進度"></progress>
+		<div id="status-notice"></div>
 	</div>
 	<script src="$GODOT_URL"></script>
 	<script>
 		const canvas = document.getElementById("canvas");
 		const status = document.getElementById("status");
-		const progress = document.getElementById("progress");
-		const label = document.getElementById("label");
-		const notice = document.getElementById("notice");
+		const progress = document.getElementById("status-progress");
+		const notice = document.getElementById("status-notice");
 		const engine = new Engine($GODOT_CONFIG);
-		engine.startGame({
-			canvas,
-			canvasResizePolicy: 2,
-			onProgress(current, total) {
-				if (total > 0) {
-					progress.max = total;
-					progress.value = current;
-					label.textContent = `正在載入夢境… ${Math.round(current / total * 100)}%`;
+		const missing = Engine.getMissingFeatures({ threads: false });
+		status.classList.add("visible");
+		if (missing.length > 0) {
+			progress.classList.remove("visible");
+			notice.textContent = `瀏覽器缺少遊戲需要的功能：${missing.join("、")}`;
+			notice.classList.add("visible");
+		} else {
+			progress.classList.add("visible");
+			engine.startGame({
+				canvas,
+				canvasResizePolicy: 2,
+				onProgress(current, total) {
+					if (current > 0 && total > 0) {
+						progress.max = total;
+						progress.value = current;
+					}
 				}
-			}
-		}).then(() => {
-			status.classList.add("done");
-			canvas.focus({ preventScroll: true });
-		}).catch((error) => {
-			label.textContent = "夢境載入失敗";
-			notice.textContent = "請重新整理頁面，或改用最新版 Chrome、Edge 或 Firefox。";
-			notice.classList.add("show");
-			console.error(error);
-		});
+			}).then(() => {
+				status.remove();
+				canvas.focus({ preventScroll: true });
+			}).catch((error) => {
+				console.error(error);
+				progress.classList.remove("visible");
+				notice.textContent = error instanceof Error ? error.message : "遊戲載入失敗，請重新整理或改用最新版 Chrome、Edge、Firefox。";
+				notice.classList.add("visible");
+			});
+		}
 	</script>
 </body>
 </html>

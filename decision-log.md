@@ -44,3 +44,10 @@
 - Decision owner: user
 - Status: confirmed
 - Follow https://rabbit-chun.github.io/game2b/ as the Web presentation reference: run the Godot canvas full-screen with a dark star-night loading state, and keep status and instructions in the game canvas. Preserve the two-level finance game and its in-game HUD.
+
+## D-007 — 微光理財屋 Web reference
+
+- Date: 2026-11-25
+- Decision owner: user
+- Status: confirmed
+- Use https://victor28825252-debug.github.io/Game1/little-finance-nightmares/docs/ as the current Web shell reference: full-screen black/dark canvas, centered game identity during startup, bottom progress indicator, and clear feature/load failure notice. Preserve the two-level finance game and in-canvas HUD.

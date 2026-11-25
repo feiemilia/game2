@@ -1,6 +1,6 @@
 # 本機 Web 版
 
-此資料夾由 Godot 4.7.2 的 `Web` Release preset 輸出，對應兩關生活理財學習遊戲。網頁使用全螢幕沉浸式畫布與星夜載入狀態，參考 https://rabbit-chun.github.io/game2b/ 的 Godot Web 版呈現方式。獨立 Blender 原始檔與便攜 Blender 程式不會打入遊戲包，因目前場景未載入它們。
+此資料夾由 Godot 4.7.2 的 `Web` Release preset 輸出，對應兩關生活理財學習遊戲。網頁使用全螢幕沉浸式畫布，載入頁採深色背景、中央「微光理財屋」標題和底部進度條，參考 https://victor28825252-debug.github.io/Game1/little-finance-nightmares/docs/ 的 Godot Web 版呈現方式。獨立 Blender 原始檔與便攜 Blender 程式不會打入遊戲包，因目前場景未載入它們。
 
 請用本機 HTTP 伺服器開啟，不要直接雙擊 `index.html`。在專案根目錄執行：
 

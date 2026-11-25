@@ -1,5 +1,11 @@
 # Change Log
 
+## 2026-11-25 — 微光理財屋 Web presentation
+
+- Updated the full-screen custom shell to use the reference's minimal dark startup overlay, centered game identity, bottom loading progress, and browser-feature/load failure feedback.
+- Kept gameplay HUD, scores, keys, and controls inside the Godot canvas.
+
+
 ## 2026-11-25 — GitHub Pages root publish
 
 - Mirrored the Godot Web release files to the repository root because the active Pages build uses the main-branch source; this lets the public site serve the full-screen game directly.
